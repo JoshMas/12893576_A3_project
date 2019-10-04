@@ -23,5 +23,19 @@ public class InputManager : MonoBehaviour
             gameManager.RotateActiveBlock();
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            gameManager.MoveActiveBlock(-0.64f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            gameManager.MoveActiveBlock(0.64f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            gameManager.StepDownActiveBlock();
+        }
     }
 }

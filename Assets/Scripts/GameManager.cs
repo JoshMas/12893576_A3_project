@@ -31,8 +31,13 @@ public class GameManager : MonoBehaviour
         if (timer > counter)
         {
             counter += interval;
-            activeBlock.GetComponent<Tetromino_Behaviour>().StepDown();
+            StepDownActiveBlock();
         }
+    }
+
+    public void StepDownActiveBlock()
+    {
+        activeBlock.GetComponent<Tetromino_Behaviour>().StepDown();
     }
 
     public void RotateActiveBlock()
@@ -40,5 +45,8 @@ public class GameManager : MonoBehaviour
         activeBlock.GetComponent<Tetromino_Behaviour>().Rotate();
     }
 
-
+    public void MoveActiveBlock(float dist)
+    {
+        activeBlock.GetComponent<Tetromino_Behaviour>().Move(dist);
+    }
 }

@@ -38,4 +38,9 @@ public class Tetromino_Behaviour : MonoBehaviour
             block.Rotate();
         }
     }
+
+    public void Move(float dist)
+    {
+        transform.Translate(new Vector3(dist, 0, 0));
+    }
 }
