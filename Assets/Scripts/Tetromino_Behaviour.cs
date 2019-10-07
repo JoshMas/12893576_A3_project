@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tetromino_Behaviour : MonoBehaviour
 {
     private Vector3 previousPosition;
+    private Vector3 borderCollision;
     private bool isActive = false;
     private List<Block_Behaviour> scripts;
 
@@ -12,6 +13,7 @@ public class Tetromino_Behaviour : MonoBehaviour
     void Start()
     {
         previousPosition = new Vector3(0, 0, 0);
+        borderCollision = new Vector3(0, 0, 0);
         scripts = new List<Block_Behaviour>();
         Block_Behaviour[] list = GetComponentsInChildren<Block_Behaviour>();
         foreach (Block_Behaviour item in list)
@@ -23,7 +25,11 @@ public class Tetromino_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (borderCollision.magnitude > 0)
+        {
+            Move(Vector3.Normalize(borderCollision));
+            borderCollision.Set(0, 0, 0);
+        }
     }
 
     /*
@@ -54,5 +60,9 @@ public class Tetromino_Behaviour : MonoBehaviour
         transform.position = previousPosition;
     }
 
+    public void DetectBorderCollision(Vector3 direction)
+    {
+        borderCollision += direction;
+    }
     
 }

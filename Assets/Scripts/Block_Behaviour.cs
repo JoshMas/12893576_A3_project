@@ -25,6 +25,6 @@ public class Block_Behaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        parentScript.Move(collision.gameObject.GetComponent<Border_Behaviour>().movement);
+        parentScript.DetectBorderCollision(collision.gameObject.GetComponent<Border_Behaviour>().movement);
     }
 }
