@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Tetromino_Behaviour : MonoBehaviour
 {
-
+    private Vector3 previousPosition;
     private bool isActive = false;
     private List<Block_Behaviour> scripts;
 
     // Start is called before the first frame update
     void Start()
     {
+        previousPosition = new Vector3(0, 0, 0);
         scripts = new List<Block_Behaviour>();
         Block_Behaviour[] list = GetComponentsInChildren<Block_Behaviour>();
         foreach (Block_Behaviour item in list)
@@ -27,6 +28,7 @@ public class Tetromino_Behaviour : MonoBehaviour
 
     public void StepDown()
     {
+        previousPosition = transform.position;
         transform.Translate(new Vector3(0.0f, -0.64f), Space.World);
     }
 
@@ -41,6 +43,14 @@ public class Tetromino_Behaviour : MonoBehaviour
 
     public void Move(float dist)
     {
-        transform.Translate(new Vector3(dist, 0, 0));
+        previousPosition = transform.position;
+        transform.Translate(new Vector3(dist, 0, 0), Space.World);
     }
+
+    public void MoveBack()
+    {
+        transform.position = previousPosition;
+    }
+
+    
 }
