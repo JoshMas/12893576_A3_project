@@ -25,12 +25,12 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            gameManager.MoveActiveBlock(-0.64f);
+            gameManager.MoveActiveBlock(-1.0f);
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            gameManager.MoveActiveBlock(0.64f);
+            gameManager.MoveActiveBlock(1.0f);
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))

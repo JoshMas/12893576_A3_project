@@ -23,14 +23,16 @@ public class Tetromino_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
+    /*
     public void StepDown()
     {
         previousPosition = transform.position;
-        transform.Translate(new Vector3(0.0f, -0.64f), Space.World);
+        transform.Translate(new Vector3(0.0f, -1.0f), Space.World);
     }
+    */
 
     public void Rotate()
     {
@@ -41,10 +43,10 @@ public class Tetromino_Behaviour : MonoBehaviour
         }
     }
 
-    public void Move(float dist)
+    public void Move(Vector3 direction)
     {
         previousPosition = transform.position;
-        transform.Translate(new Vector3(dist, 0, 0), Space.World);
+        transform.Translate(direction, Space.World);
     }
 
     public void MoveBack()

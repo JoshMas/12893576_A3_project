@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void StepDownActiveBlock()
     {
-        activeBlock.GetComponent<Tetromino_Behaviour>().StepDown();
+        activeBlock.GetComponent<Tetromino_Behaviour>().Move(new Vector3(0.0f, -1.0f));
     }
 
     public void RotateActiveBlock()
@@ -47,6 +47,6 @@ public class GameManager : MonoBehaviour
 
     public void MoveActiveBlock(float dist)
     {
-        activeBlock.GetComponent<Tetromino_Behaviour>().Move(dist);
+        activeBlock.GetComponent<Tetromino_Behaviour>().Move(new Vector3(dist, 0.0f));
     }
 }
