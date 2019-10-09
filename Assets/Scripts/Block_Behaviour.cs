@@ -18,16 +18,19 @@ public class Block_Behaviour : MonoBehaviour
 
     }
 
+    //Rotates the block 90 degrees clockwise
     public void Rotate()
     {
         transform.Rotate(0, 0, 90, Space.Self);
     }
 
+    //Changes whether the SpriteRenderer is enabled or not
     public void SetRenderer(bool value)
     {
         GetComponent<SpriteRenderer>().enabled = value;
     }
 
+    //Detects collisions with other blocks and the game border, sending a vector back to the parent in order to move it back out
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<Border_Behaviour>() != null)

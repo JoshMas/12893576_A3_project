@@ -19,10 +19,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> blockList;
 
+    private GameObject[] rowList;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rowList = GameObject.FindGameObjectsWithTag("Row");
     }
 
     // Update is called once per frame
@@ -39,6 +41,16 @@ public class GameManager : MonoBehaviour
         if (activeBlock.GetComponent<Tetromino_Behaviour>().CheckPosition() == 0)
         {
             SwapActiveBlock();
+            foreach (GameObject row in rowList)
+            {
+                Row_Behaviour script = row.GetComponent<Row_Behaviour>();
+                if (script.IsRowFull())
+                {
+                    DeleteAtHeight(row.transform.position.y);
+                    script.ClearRow();
+                    MoveBoardDown(row.transform.position.y);
+                }
+            }
         }
     }
 
@@ -78,5 +90,35 @@ public class GameManager : MonoBehaviour
         } while (newBlock.Equals(previousBlock));
         GameObject chosenBlock = Instantiate(newBlock, new Vector3(11, -3), Quaternion.identity);
         return chosenBlock;
+    }
+
+    private void DeleteAtHeight(float height)
+    {
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+        List<GameObject> blocksToDestroy = new List<GameObject>();
+        foreach(GameObject block in blocks)
+        {
+            if(block.transform.position.y == height)
+            {
+                blocksToDestroy.Add(block);
+            }
+        }
+
+        foreach(GameObject block in blocksToDestroy)
+        {
+            Destroy(block);
+        }
+    }
+
+    public void MoveBoardDown(float height)
+    {
+        GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Block");
+        foreach(GameObject block in allBlocks)
+        {
+            if(block.transform.position.y > height)
+            {
+                block.transform.Translate(Vector3.down);
+            }
+        }
     }
 }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Tetromino_Behaviour : MonoBehaviour
 {
+    //The position the tetromino was in on the row above
     private Vector3 previousPosition;
+    //The vector used to move the tetromino when a collision occurs
     private Vector3 borderCollision;
-    private bool isActive = true;
+    //The scripts attached to the blocks that make up this tetromino
     private List<Block_Behaviour> scripts;
 
     // Start is called before the first frame update
@@ -25,7 +27,7 @@ public class Tetromino_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (borderCollision.magnitude > 0 && isActive)
+        if (borderCollision.magnitude > 0)
         {
             transform.Translate(borderCollision.normalized, Space.World);
             borderCollision.Set(0, 0, 0);
@@ -40,6 +42,7 @@ public class Tetromino_Behaviour : MonoBehaviour
     }
     */
 
+    //Rotates the tetromino 90 degrees counterclockwise
     public void Rotate()
     {
         transform.Rotate(new Vector3(0, 0, -90), Space.Self);  
@@ -49,6 +52,7 @@ public class Tetromino_Behaviour : MonoBehaviour
         }
     }
 
+    //Moves the tetromino 1 space down, also moving the previousPosition
     public void MoveDown()
     {
         previousPosition = transform.position;
@@ -70,10 +74,12 @@ public class Tetromino_Behaviour : MonoBehaviour
     {
         borderCollision += direction;
     }
-
-    public void Deactivate()
-    {
-        isActive = false;
-    }
     
+    public void DestroyIfEmpty()
+    {
+        if(scripts.Count == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
