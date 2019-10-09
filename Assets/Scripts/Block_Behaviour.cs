@@ -20,11 +20,31 @@ public class Block_Behaviour : MonoBehaviour
 
     public void Rotate()
     {
-        transform.Rotate(0, 0, -90, Space.Self);
+        transform.Rotate(0, 0, 90, Space.Self);
+    }
+
+    public void SetRenderer(bool value)
+    {
+        GetComponent<SpriteRenderer>().enabled = value;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        parentScript.DetectBorderCollision(collision.gameObject.GetComponent<Border_Behaviour>().movement);
+        if (collision.gameObject.GetComponent<Border_Behaviour>() != null)
+        {
+            parentScript.DetectBorderCollision(collision.gameObject.GetComponent<Border_Behaviour>().movement);
+        } else
+        {
+            Vector3 distance = transform.parent.transform.position - collision.gameObject.transform.position;
+            if (parentScript.CheckPosition() <= 1)
+            {
+                parentScript.DetectBorderCollision(Vector3.up);
+            }
+            else
+            {
+                parentScript.DetectBorderCollision(new Vector3(distance.x, 0.0f));
+            }
+            
+        }
     }
 }

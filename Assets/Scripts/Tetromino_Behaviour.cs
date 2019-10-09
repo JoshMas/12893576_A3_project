@@ -6,7 +6,7 @@ public class Tetromino_Behaviour : MonoBehaviour
 {
     private Vector3 previousPosition;
     private Vector3 borderCollision;
-    private bool isActive = false;
+    private bool isActive = true;
     private List<Block_Behaviour> scripts;
 
     // Start is called before the first frame update
@@ -25,9 +25,9 @@ public class Tetromino_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (borderCollision.magnitude > 0)
+        if (borderCollision.magnitude > 0 && isActive)
         {
-            Move(Vector3.Normalize(borderCollision));
+            transform.Translate(borderCollision.normalized, Space.World);
             borderCollision.Set(0, 0, 0);
         }
     }
@@ -42,27 +42,38 @@ public class Tetromino_Behaviour : MonoBehaviour
 
     public void Rotate()
     {
-        transform.Rotate(new Vector3(0, 0, 90), Space.Self);  
+        transform.Rotate(new Vector3(0, 0, -90), Space.Self);  
         foreach (Block_Behaviour block in scripts)
         {
             block.Rotate();
         }
     }
 
-    public void Move(Vector3 direction)
+    public void MoveDown()
     {
         previousPosition = transform.position;
+        transform.Translate(new Vector3(0.0f, -1.0f), Space.World);
+    }
+
+    public void Move(Vector3 direction)
+    {
+        //previousPosition = transform.position;
         transform.Translate(direction, Space.World);
     }
 
-    public void MoveBack()
+    public float CheckPosition()
     {
-        transform.position = previousPosition;
+        return Vector3.Distance(transform.position, previousPosition);
     }
 
     public void DetectBorderCollision(Vector3 direction)
     {
         borderCollision += direction;
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
     }
     
 }
