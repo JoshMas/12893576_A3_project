@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
                 if (script.IsRowFull())
                 {
                     DeleteAtHeight(row.transform.position.y);
-                    script.ClearRow();
                     MoveBoardDown(row.transform.position.y);
                 }
             }
@@ -106,6 +105,7 @@ public class GameManager : MonoBehaviour
 
         foreach(GameObject block in blocksToDestroy)
         {
+            block.transform.Translate(new Vector3(0, -100));
             Destroy(block);
         }
     }

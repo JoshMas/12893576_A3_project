@@ -28,11 +28,6 @@ public class Row_Behaviour : MonoBehaviour
         return blockCount >= 10;
     }
 
-    public void ClearRow()
-    {
-        blockCount = 0;
-    }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         blockCount--;
