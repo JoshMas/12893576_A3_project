@@ -19,12 +19,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> blockList;
 
-    private GameObject[] rowList;
-
     // Start is called before the first frame update
     void Start()
     {
-        rowList = GameObject.FindGameObjectsWithTag("Row");
+
     }
 
     // Update is called once per frame
@@ -38,18 +36,17 @@ public class GameManager : MonoBehaviour
             counter += interval;
             StepDownActiveBlock();
         }
+
         if (activeBlock.GetComponent<Tetromino_Behaviour>().CheckPosition() == 0)
         {
-            SwapActiveBlock();
-            foreach (GameObject row in rowList)
+            for(float i = 9.5f; i >= -9.5f; --i)
             {
-                Row_Behaviour script = row.GetComponent<Row_Behaviour>();
-                if (script.IsRowFull())
+                if (DeleteAtHeight(i))
                 {
-                    DeleteAtHeight(row.transform.position.y);
-                    MoveBoardDown(row.transform.position.y);
+                    MoveBoardDown(i);
                 }
             }
+            SwapActiveBlock();
         }
     }
 
@@ -86,28 +83,33 @@ public class GameManager : MonoBehaviour
         do
         {
             newBlock = blockList[Random.Range(0, blockList.Count)];
-        } while (newBlock.Equals(previousBlock));
+        } while (newBlock.name == previousBlock.name);
         GameObject chosenBlock = Instantiate(newBlock, new Vector3(11, -3), Quaternion.identity);
         return chosenBlock;
     }
 
-    private void DeleteAtHeight(float height)
+    private bool DeleteAtHeight(float height)
     {
         GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
         List<GameObject> blocksToDestroy = new List<GameObject>();
         foreach(GameObject block in blocks)
         {
-            if(block.transform.position.y == height)
+            if(Mathf.Abs(height - block.transform.position.y) < 0.1 && block.transform.position.x < 6)
             {
                 blocksToDestroy.Add(block);
             }
         }
-
-        foreach(GameObject block in blocksToDestroy)
+        Debug.Log("Row: " + (height + 11.5) + "| Blocks: " + blocksToDestroy.Count);
+        if (blocksToDestroy.Count >= 10)
         {
-            block.transform.Translate(new Vector3(0, -100));
-            Destroy(block);
+            foreach (GameObject block in blocksToDestroy)
+            {
+                block.transform.Translate(new Vector3(0, -100));
+                Destroy(block);
+            }
+            return true;
         }
+        return false;
     }
 
     public void MoveBoardDown(float height)
@@ -115,7 +117,7 @@ public class GameManager : MonoBehaviour
         GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Block");
         foreach(GameObject block in allBlocks)
         {
-            if(block.transform.position.y > height)
+            if(block.transform.position.y > height && block.transform.position.x < 6)
             {
                 block.transform.Translate(Vector3.down);
             }
