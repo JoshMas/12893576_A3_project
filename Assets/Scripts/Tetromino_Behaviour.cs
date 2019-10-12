@@ -27,10 +27,20 @@ public class Tetromino_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RestrictTransform();
         if (borderCollision.magnitude > 0)
         {
             transform.Translate(borderCollision.normalized, Space.World);
             borderCollision.Set(0, 0, 0);
+        }
+    }
+
+    // Keeps the x and y position of the tetromino on integer values
+    private void RestrictTransform()
+    {
+        if (transform.position.x % 1 != 0)
+        {
+            transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
         }
     }
 
@@ -45,7 +55,7 @@ public class Tetromino_Behaviour : MonoBehaviour
     //Rotates the tetromino 90 degrees counterclockwise
     public void Rotate()
     {
-        transform.Rotate(new Vector3(0, 0, -90), Space.Self);  
+        transform.Rotate(new Vector3(0, 0, -90), Space.Self);
         foreach (Block_Behaviour block in scripts)
         {
             block.Rotate();

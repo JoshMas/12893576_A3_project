@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
                 blocksToDestroy.Add(block);
             }
         }
-        Debug.Log("Row: " + (height + 11.5) + "| Blocks: " + blocksToDestroy.Count);
+        //Debug.Log("Row: " + (height + 11.5) + "| Blocks: " + blocksToDestroy.Count);
         if (blocksToDestroy.Count >= 10)
         {
             foreach (GameObject block in blocksToDestroy)

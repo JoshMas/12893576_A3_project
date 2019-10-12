@@ -45,9 +45,14 @@ public class Block_Behaviour : MonoBehaviour
             }
             else
             {
-                parentScript.DetectBorderCollision(new Vector3(distance.x, 0.0f));
+                parentScript.DetectBorderCollision(Vector3.Normalize(new Vector3(distance.x, 0.0f)));
             }
             
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        OnCollisionEnter2D(collision);
     }
 }
