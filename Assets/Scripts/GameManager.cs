@@ -6,8 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     private float timer = 0.0f;
-    [SerializeField]
-    private float interval = 1.0f;
+    private float interval = 1.1f;
     private float counter = 0.0f;
 
     [SerializeField]
@@ -19,10 +18,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> blockList;
 
+    private SpeedManager speedManager;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        speedManager = gameObject.GetComponent<SpeedManager>();
     }
 
     // Update is called once per frame
@@ -39,14 +40,16 @@ public class GameManager : MonoBehaviour
 
         if (activeBlock.CheckPosition() == 0)
         {
+            int count = 0;
             for(float i = 9.5f; i >= -9.5f; --i)
             {
                 if (DeleteAtHeight(i))
                 {
-                    
+                    ++count;
                     StartCoroutine(MoveBoardDown(i));
                 }
             }
+            interval = speedManager.UpdateScore(count);
             SwapActiveBlock();
         }
     }
@@ -135,5 +138,7 @@ public class GameManager : MonoBehaviour
         {
             block.GetComponent<Block_Behaviour>().SetGameOverTrigger();
         }
+        speedManager.GameOver();
+        enabled = false;
     }
 }

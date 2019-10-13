@@ -14,7 +14,7 @@ public class Tetromino_Behaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        previousPosition = new Vector3(0, 0, 0);
+        previousPosition = new Vector3(0, 10, 0);
         borderCollision = new Vector3(0, 0, 0);
         scripts = new List<Block_Behaviour>();
         Block_Behaviour[] list = GetComponentsInChildren<Block_Behaviour>();

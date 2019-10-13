@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -36,6 +37,11 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             gameManager.StepDownActiveBlock();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
