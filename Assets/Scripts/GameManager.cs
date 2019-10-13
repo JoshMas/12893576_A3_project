@@ -92,12 +92,12 @@ public class GameManager : MonoBehaviour
 
     private Tetromino_Behaviour SelectNextBlock(Tetromino_Behaviour previousBlock)
     {
-
         GameObject newBlock;
-        do
+        newBlock = blockList[Random.Range(0, blockList.Count)];
+        while(newBlock.name == previousBlock.gameObject.name)
         {
             newBlock = blockList[Random.Range(0, blockList.Count)];
-        } while (newBlock.name == previousBlock.name);
+        }
         GameObject chosenBlock = Instantiate(newBlock, new Vector3(11, -3), Quaternion.identity);
         return chosenBlock.GetComponent<Tetromino_Behaviour>();
     }
@@ -118,7 +118,14 @@ public class GameManager : MonoBehaviour
         {
             foreach (GameObject block in blocksToDestroy)
             {
-                block.GetComponent<Block_Behaviour>().SetClearTrigger();
+                if (block.GetComponent<Block_Behaviour>().IsTheBoss())
+                {
+                    GameWin();
+                }
+                else
+                {
+                    block.GetComponent<Block_Behaviour>().SetClearTrigger();
+                }
                 //block.transform.Translate(new Vector3(0, -100));
                 //Destroy(block);
             }
@@ -142,13 +149,26 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        enabled = false;
         gameOverAudio.Play();
         GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Block");
         foreach(GameObject block in allBlocks)
         {
             block.GetComponent<Block_Behaviour>().SetGameOverTrigger();
         }
-        speedManager.GameOver();
+        speedManager.GameOver("Game Over\nPress Esc to Exit");
+    }
+
+    public void GameWin()
+    {
+        lineClearAudio.Play();
+        speedManager.UpdateScore(20);
         enabled = false;
+        GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Block");
+        foreach (GameObject block in allBlocks)
+        {
+            block.GetComponent<Block_Behaviour>().SetClearTrigger();
+        }
+        speedManager.GameOver("You Win!\nPress Esc to Exit");
     }
 }

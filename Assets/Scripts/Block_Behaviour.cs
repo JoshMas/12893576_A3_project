@@ -6,6 +6,7 @@ public class Block_Behaviour : MonoBehaviour
 {
     private Tetromino_Behaviour parentScript;
     private Animator animator;
+    private bool isTheBoss = false;
 
     [SerializeField]
     private AudioClip[] impactClips;
@@ -35,6 +36,16 @@ public class Block_Behaviour : MonoBehaviour
     public void SetRenderer(bool value)
     {
         GetComponent<SpriteRenderer>().enabled = value;
+    }
+
+    public bool IsTheBoss()
+    {
+        return isTheBoss;
+    }
+
+    public void IAmTheBoss()
+    {
+        isTheBoss = true;
     }
 
     //Detects collisions with other blocks and the game border, sending a vector back to the parent in order to move it back out
@@ -73,17 +84,17 @@ public class Block_Behaviour : MonoBehaviour
 
     public void SetGameOverTrigger()
     {
+        Destroy(gameObject.GetComponent<BoxCollider2D>());
         animator.SetTrigger("GameOver");
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
     private void PlayImpactNoise()
     {
-        if (impactAudio.isPlaying)
+        if (!impactAudio.isPlaying)
         {
-            impactAudio.Stop();
+            impactAudio.clip = impactClips[Random.Range(0, impactClips.Length)];
+            impactAudio.Play();
         }
-        impactAudio.clip = impactClips[Random.Range(0, impactClips.Length)];
-        impactAudio.Play();
     }
 }

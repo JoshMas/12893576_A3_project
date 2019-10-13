@@ -23,7 +23,7 @@ public class Border_Behaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isTop)
+        if (isTop && !collision.GetComponentInParent<Tetromino_Behaviour>().enabled)
         {
             GameObject.FindWithTag("GameController").GetComponent<GameManager>().GameOver();
         }
