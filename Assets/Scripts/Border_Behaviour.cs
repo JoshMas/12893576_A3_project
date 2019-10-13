@@ -7,7 +7,7 @@ public class Border_Behaviour : MonoBehaviour
 
     public Vector3 movement;
     [SerializeField]
-    private bool isTop;
+    private bool isTop = false;
 
     // Start is called before the first frame update
     void Start()

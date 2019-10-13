@@ -9,7 +9,7 @@ public class Block_Behaviour : MonoBehaviour
     private bool isTheBoss = false;
 
     [SerializeField]
-    private AudioClip[] impactClips;
+    private AudioClip[] impactClips = new AudioClip[2];
     private AudioSource impactAudio;
 
     // Start is called before the first frame update

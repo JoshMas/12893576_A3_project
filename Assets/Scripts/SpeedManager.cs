@@ -9,9 +9,9 @@ public class SpeedManager : MonoBehaviour
     private int level;
     private float speed;
     [SerializeField]
-    private Text scoreText;
+    private Text scoreText = null;
     [SerializeField]
-    private Text levelText;
+    private Text levelText = null;
 
     private GameManager gameManager;
 

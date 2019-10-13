@@ -16,14 +16,14 @@ public class GameManager : MonoBehaviour
     private Tetromino_Behaviour nextBlock;
 
     [SerializeField]
-    private List<GameObject> blockList;
+    private List<GameObject> blockList = new List<GameObject>();
 
     private SpeedManager speedManager;
 
     [SerializeField]
-    private AudioSource lineClearAudio;
+    private AudioSource lineClearAudio = null;
     [SerializeField]
-    private AudioSource gameOverAudio;
+    private AudioSource gameOverAudio = null;
 
     // Start is called before the first frame update
     void Start()
