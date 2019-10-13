@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
 
     private SpeedManager speedManager;
 
+    [SerializeField]
+    private AudioSource lineClearAudio;
+    [SerializeField]
+    private AudioSource gameOverAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +53,10 @@ public class GameManager : MonoBehaviour
                     ++count;
                     StartCoroutine(MoveBoardDown(i));
                 }
+            }
+            if(count > 0)
+            {
+                lineClearAudio.Play();
             }
             interval = speedManager.UpdateScore(count);
             SwapActiveBlock();
@@ -133,6 +142,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        gameOverAudio.Play();
         GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Block");
         foreach(GameObject block in allBlocks)
         {
