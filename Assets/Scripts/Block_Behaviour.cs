@@ -5,11 +5,13 @@ using UnityEngine;
 public class Block_Behaviour : MonoBehaviour
 {
     private Tetromino_Behaviour parentScript;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         parentScript = GetComponentInParent<Tetromino_Behaviour>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,11 +35,13 @@ public class Block_Behaviour : MonoBehaviour
     //Detects collisions with other blocks and the game border, sending a vector back to the parent in order to move it back out
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.GetComponent<Border_Behaviour>() != null)
         {
             parentScript.DetectBorderCollision(collision.gameObject.GetComponent<Border_Behaviour>().movement);
         } else
         {
+        
             Vector3 distance = transform.parent.transform.position - collision.gameObject.transform.position;
             if (parentScript.CheckPosition() <= 1)
             {
@@ -54,5 +58,17 @@ public class Block_Behaviour : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         OnCollisionEnter2D(collision);
+    }
+
+    public void SetClearTrigger()
+    {
+        animator.SetTrigger("IsCleared");
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+    }
+
+    public void SetGameOverTrigger()
+    {
+        animator.SetTrigger("GameOver");
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 }

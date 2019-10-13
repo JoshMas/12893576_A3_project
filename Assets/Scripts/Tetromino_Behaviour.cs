@@ -33,6 +33,7 @@ public class Tetromino_Behaviour : MonoBehaviour
             transform.Translate(borderCollision.normalized, Space.World);
             borderCollision.Set(0, 0, 0);
         }
+        //DestroyIfEmpty();
     }
 
     // Keeps the x and y position of the tetromino on integer values
@@ -83,13 +84,5 @@ public class Tetromino_Behaviour : MonoBehaviour
     public void DetectBorderCollision(Vector3 direction)
     {
         borderCollision += direction;
-    }
-    
-    public void DestroyIfEmpty()
-    {
-        if(scripts.Count == 0)
-        {
-            Destroy(gameObject);
-        }
     }
 }

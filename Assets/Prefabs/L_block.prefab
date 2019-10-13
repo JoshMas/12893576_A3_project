@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5122670233080093231}
   - component: {fileID: 2110717533408164935}
+  - component: {fileID: 697744208330573098}
   m_Layer: 0
   m_Name: L_block
   m_TagString: Untagged
@@ -45,6 +46,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a697243fb8603ca4583001a4ee4527cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &697744208330573098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5122670233080093228}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a438911cf921369478b277a8e61f4e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4243070212269497811
@@ -237,12 +250,12 @@ PrefabInstance:
     - target: {fileID: 9076170035647803045, guid: 98be56bf4bef5844c9385ccda1a8984c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9076170035647803045, guid: 98be56bf4bef5844c9385ccda1a8984c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9076170035647803045, guid: 98be56bf4bef5844c9385ccda1a8984c,
         type: 3}

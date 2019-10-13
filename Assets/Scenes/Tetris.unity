@@ -202,9 +202,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 111423572}
-  - component: {fileID: 111423573}
   - component: {fileID: 111423571}
   - component: {fileID: 111423574}
+  - component: {fileID: 111423573}
   m_Layer: 0
   m_Name: Top Border
   m_TagString: Untagged
@@ -222,7 +222,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -246,8 +246,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111423570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.5, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 11, z: 0}
+  m_LocalScale: {x: 10, y: 1.8, z: 1}
   m_Children: []
   m_Father: {fileID: 597560533}
   m_RootOrder: 3
@@ -264,8 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c735fad0c3995842874c43b11167e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {x: 0, y: -1, z: 0}
-  isBottom: 0
+  movement: {x: 0, y: 0, z: 0}
   isTop: 1
 --- !u!50 &111423574
 Rigidbody2D:
@@ -297,9 +296,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 194469920}
-  - component: {fileID: 194469921}
   - component: {fileID: 194469919}
   - component: {fileID: 194469922}
+  - component: {fileID: 194469921}
   m_Layer: 0
   m_Name: Right Border
   m_TagString: Untagged
@@ -341,8 +340,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194469918}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 20, z: 1}
+  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 597560533}
   m_RootOrder: 1
@@ -360,7 +359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {x: -1, y: 0, z: 0}
-  isBottom: 0
   isTop: 0
 --- !u!50 &194469922
 Rigidbody2D:
@@ -452,12 +450,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcf2db06af7bb954a9e8fd42c86ffa47, type: 3}
---- !u!1 &299643023 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3018119129565811350, guid: bcf2db06af7bb954a9e8fd42c86ffa47,
+--- !u!114 &299643024 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7990398178999148429, guid: bcf2db06af7bb954a9e8fd42c86ffa47,
     type: 3}
   m_PrefabInstance: {fileID: 299643021}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a697243fb8603ca4583001a4ee4527cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &325065028
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,9 +471,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 325065030}
-  - component: {fileID: 325065031}
   - component: {fileID: 325065029}
   - component: {fileID: 325065032}
+  - component: {fileID: 325065031}
   m_Layer: 0
   m_Name: Bottom Border
   m_TagString: Untagged
@@ -511,8 +515,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325065028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -10.5, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -11, z: 0}
+  m_LocalScale: {x: 10, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 597560533}
   m_RootOrder: 2
@@ -530,7 +534,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {x: 0, y: 1, z: 0}
-  isBottom: 1
   isTop: 0
 --- !u!50 &325065032
 Rigidbody2D:
@@ -641,9 +644,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 513173323}
-  - component: {fileID: 513173324}
   - component: {fileID: 513173325}
   - component: {fileID: 513173322}
+  - component: {fileID: 513173324}
   m_Layer: 0
   m_Name: Left Border
   m_TagString: Untagged
@@ -685,8 +688,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513173321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 20, z: 1}
+  m_LocalPosition: {x: -6, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 597560533}
   m_RootOrder: 0
@@ -704,7 +707,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {x: 1, y: 0, z: 0}
-  isBottom: 0
   isTop: 0
 --- !u!50 &513173325
 Rigidbody2D:
@@ -951,8 +953,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 1
-  activeBlock: {fileID: 1027813961}
-  nextBlock: {fileID: 299643023}
+  activeBlock: {fileID: 1027813962}
+  nextBlock: {fileID: 299643024}
   blockList:
   - {fileID: 3018119129565811350, guid: bcf2db06af7bb954a9e8fd42c86ffa47, type: 3}
   - {fileID: 6530724439038375617, guid: 8daee442a50a4ea418332346a3be1076, type: 3}
@@ -1077,12 +1079,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42b8b48b4567b8b4389f271fed777bce, type: 3}
---- !u!1 &1027813961 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2334387929555164640, guid: 42b8b48b4567b8b4389f271fed777bce,
+--- !u!114 &1027813962 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7889757781200061420, guid: 42b8b48b4567b8b4389f271fed777bce,
     type: 3}
   m_PrefabInstance: {fileID: 1027813960}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a697243fb8603ca4583001a4ee4527cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1032039327
 GameObject:
   m_ObjectHideFlags: 0

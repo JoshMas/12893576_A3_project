@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
     private float counter = 0.0f;
 
     [SerializeField]
-    private GameObject activeBlock;
+    private Tetromino_Behaviour activeBlock;
 
     [SerializeField]
-    private GameObject nextBlock;
+    private Tetromino_Behaviour nextBlock;
 
     [SerializeField]
     private List<GameObject> blockList;
@@ -37,13 +37,14 @@ public class GameManager : MonoBehaviour
             StepDownActiveBlock();
         }
 
-        if (activeBlock.GetComponent<Tetromino_Behaviour>().CheckPosition() == 0)
+        if (activeBlock.CheckPosition() == 0)
         {
             for(float i = 9.5f; i >= -9.5f; --i)
             {
                 if (DeleteAtHeight(i))
                 {
-                    MoveBoardDown(i);
+                    
+                    StartCoroutine(MoveBoardDown(i));
                 }
             }
             SwapActiveBlock();
@@ -52,31 +53,32 @@ public class GameManager : MonoBehaviour
 
     public void StepDownActiveBlock()
     {
-        activeBlock.GetComponent<Tetromino_Behaviour>().MoveDown();
+        activeBlock.MoveDown();
         
     }
 
     public void RotateActiveBlock()
     {
-        activeBlock.GetComponent<Tetromino_Behaviour>().Rotate();
+        activeBlock.Rotate();
     }
 
     public void MoveActiveBlock(float dist)
     {
-        activeBlock.GetComponent<Tetromino_Behaviour>().Move(new Vector3(dist, 0.0f));
+        activeBlock.Move(new Vector3(dist, 0.0f));
     }
 
     public void SwapActiveBlock()
     {
-        nextBlock.GetComponent<Tetromino_Behaviour>().Move(new Vector3(-11, 3));
-        GameObject temp = activeBlock;
+        nextBlock.Move(new Vector3(-11, 3));
+        Tetromino_Behaviour temp = activeBlock;
         activeBlock = nextBlock;
         activeBlock.transform.position = new Vector3(0, 9);
         nextBlock = SelectNextBlock(nextBlock);
-        temp.GetComponent<Tetromino_Behaviour>().enabled = false;
+        temp.gameObject.GetComponent<DestroyIfEmpty>().enabled = true;
+        temp.enabled = false;
     }
 
-    private GameObject SelectNextBlock(GameObject previousBlock)
+    private Tetromino_Behaviour SelectNextBlock(Tetromino_Behaviour previousBlock)
     {
 
         GameObject newBlock;
@@ -85,7 +87,7 @@ public class GameManager : MonoBehaviour
             newBlock = blockList[Random.Range(0, blockList.Count)];
         } while (newBlock.name == previousBlock.name);
         GameObject chosenBlock = Instantiate(newBlock, new Vector3(11, -3), Quaternion.identity);
-        return chosenBlock;
+        return chosenBlock.GetComponent<Tetromino_Behaviour>();
     }
 
     private bool DeleteAtHeight(float height)
@@ -104,16 +106,18 @@ public class GameManager : MonoBehaviour
         {
             foreach (GameObject block in blocksToDestroy)
             {
-                block.transform.Translate(new Vector3(0, -100));
-                Destroy(block);
+                block.GetComponent<Block_Behaviour>().SetClearTrigger();
+                //block.transform.Translate(new Vector3(0, -100));
+                //Destroy(block);
             }
             return true;
         }
         return false;
     }
 
-    public void MoveBoardDown(float height)
+    IEnumerator MoveBoardDown(float height)
     {
+        yield return new WaitForSeconds(1.0f);
         GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Block");
         foreach(GameObject block in allBlocks)
         {
@@ -121,6 +125,15 @@ public class GameManager : MonoBehaviour
             {
                 block.transform.Translate(Vector3.down);
             }
+        }
+    }
+
+    public void GameOver()
+    {
+        GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Block");
+        foreach(GameObject block in allBlocks)
+        {
+            block.GetComponent<Block_Behaviour>().SetGameOverTrigger();
         }
     }
 }

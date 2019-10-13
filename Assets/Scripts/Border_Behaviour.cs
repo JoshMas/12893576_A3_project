@@ -7,8 +7,6 @@ public class Border_Behaviour : MonoBehaviour
 
     public Vector3 movement;
     [SerializeField]
-    private bool isBottom;
-    [SerializeField]
     private bool isTop;
 
     // Start is called before the first frame update
@@ -21,6 +19,14 @@ public class Border_Behaviour : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isTop)
+        {
+            GameObject.FindWithTag("GameController").GetComponent<GameManager>().GameOver();
+        }
     }
 
 }
