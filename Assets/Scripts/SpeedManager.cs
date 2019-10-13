@@ -39,12 +39,14 @@ public class SpeedManager : MonoBehaviour
         
     }
 
+    //Updates the text on the score and level panels
     private void SetScoreBoards()
     {
         scoreText.text = "Top Score:\n" + topScore.ToString("D6") + "\nCurrent Score:\n" + currentScore.ToString("D6");
         levelText.text = "Level:\n" + level.ToString("D2");
     }
 
+    //Updates the values of the score, speed and level based on the lines cleared
     public float UpdateScore(int lines)
     {
         if (gameManager.enabled)
@@ -77,6 +79,7 @@ public class SpeedManager : MonoBehaviour
         return speed;
     }
 
+    //This method handles saving the top score, and directing the player to exit when a game has ended
     public void GameOver(string text)
     {
         if (currentScore > topScore)

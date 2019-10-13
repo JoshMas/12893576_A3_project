@@ -28,12 +28,12 @@ public class Tetromino_Behaviour : MonoBehaviour
     void Update()
     {
         RestrictTransform();
+        //If it has collided with anything, move in the border collision direction by one
         if (borderCollision.magnitude > 0)
         {
             transform.Translate(borderCollision.normalized, Space.World);
             borderCollision.Set(0, 0, 0);
         }
-        //DestroyIfEmpty();
     }
 
     // Keeps the x and y position of the tetromino on integer values
@@ -44,14 +44,6 @@ public class Tetromino_Behaviour : MonoBehaviour
             transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
         }
     }
-
-    /*
-    public void StepDown()
-    {
-        previousPosition = transform.position;
-        transform.Translate(new Vector3(0.0f, -1.0f), Space.World);
-    }
-    */
 
     //Rotates the tetromino 90 degrees counterclockwise
     public void Rotate()
@@ -70,17 +62,19 @@ public class Tetromino_Behaviour : MonoBehaviour
         transform.Translate(new Vector3(0.0f, -1.0f), Space.World);
     }
 
+    //Moves the tetromino 1 space in the specified direction
     public void Move(Vector3 direction)
     {
-        //previousPosition = transform.position;
         transform.Translate(direction, Space.World);
     }
 
+    //Returns the distance between the current position and the previous position
     public float CheckPosition()
     {
         return Vector3.Distance(transform.position, previousPosition);
     }
 
+    //Adds the direction to its border collision vector
     public void DetectBorderCollision(Vector3 direction)
     {
         borderCollision += direction;

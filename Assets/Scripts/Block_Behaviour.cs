@@ -20,12 +20,6 @@ public class Block_Behaviour : MonoBehaviour
         impactAudio = gameObject.GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     //Rotates the block 90 degrees clockwise
     public void Rotate()
     {
@@ -38,11 +32,13 @@ public class Block_Behaviour : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = value;
     }
 
+    //Returns true if the block is the boss
     public bool IsTheBoss()
     {
         return isTheBoss;
     }
 
+    //Turns the block into the boss
     public void IAmTheBoss()
     {
         isTheBoss = true;
@@ -71,17 +67,20 @@ public class Block_Behaviour : MonoBehaviour
         }
     }
 
+    //Does the exact same thing as the OnCollisionEnter function
     private void OnCollisionStay2D(Collision2D collision)
     {
         OnCollisionEnter2D(collision);
     }
 
+    //Plays the line clear animation, then destroys this object
     public void SetClearTrigger()
     {
         animator.SetTrigger("IsCleared");
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
+    //Plays the game over animation, then destroys this object
     public void SetGameOverTrigger()
     {
         Destroy(gameObject.GetComponent<BoxCollider2D>());
@@ -89,6 +88,7 @@ public class Block_Behaviour : MonoBehaviour
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
+    //Plays a random impact noise
     private void PlayImpactNoise()
     {
         if (!impactAudio.isPlaying)

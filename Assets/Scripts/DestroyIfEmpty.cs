@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class DestroyIfEmpty : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -16,6 +11,7 @@ public class DestroyIfEmpty : MonoBehaviour
         CheckIfEmpty();
     }
 
+    //Destroys this object if there are no children (blocks) attached
     private void CheckIfEmpty()
     {
         if (gameObject.GetComponentsInChildren<Transform>().Length == 1)

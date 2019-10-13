@@ -9,18 +9,7 @@ public class Border_Behaviour : MonoBehaviour
     [SerializeField]
     private bool isTop = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //Detects when a tetromino is placed too high up, ending the game
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isTop && !collision.GetComponentInParent<Tetromino_Behaviour>().enabled)

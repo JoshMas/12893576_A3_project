@@ -14,9 +14,4 @@ public class Boss_Behaviour : MonoBehaviour
         GetComponent<Block_Behaviour>().IAmTheBoss();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
